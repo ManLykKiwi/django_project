@@ -1,0 +1,53 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<!-- {% block title %}Flashcards{% endblock %} -->
+{% block css %}
+    <link rel="stylesheet" href="{% static 'main/css/decks.css' %}">
+{% endblock %}
+
+<body>
+
+
+    <h2 class="main-text">Find Your Decks Here!, {{user.username}}</h2>
+    
+
+    {% if displayingDecks %}
+        <div class="container"> 
+            {% for deck in displayingDecks %}
+                <div class="boxes" style="color: white;">
+                    <strong>{{ deck.topic }}</strong> - {{ deck.description }}
+                    <a href="{% url 'insideCurrentDeck' deck.id %}" class="btn btn-primary btn-sm">View Deck</a> 
+                </div>
+            {% endfor %}
+            
+        </div>
+    {% else %}
+        <p>You currently have no decks, Maybe you should create some!</p>
+    {% endif %}
+
+
+    {% if messages %}
+        {% for message in messages %}  <!-- Have to loop through messages since it will contain many TYPES-->
+            {% if message.tags == "success" %} <!-- checking the TYPE of message -->
+            <script>
+                const succMsg = "{{ message }}";
+                alert(succMsg);
+            </script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    
+    <div class="newdecks">
+        <a class="btn btn-primary" href="{% url 'newDeck' %}" role="button" background="white">Add New Decks Here!</a>    
+    </div>
+    
+
+    
+  
+   
+</body>
+{% endblock %}

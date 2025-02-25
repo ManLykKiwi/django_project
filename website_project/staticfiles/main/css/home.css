@@ -1,0 +1,17 @@
+.window{
+    background: linear-gradient(to right top,#434343, #333333, #242424, #161616, #000000 );
+    margin-top: 120px; 
+    padding-top: 300px; 
+    padding-bottom: 250px;
+    width: 1500px;
+    margin-left: 175px;
+    border-radius: 20px; 
+    border: 2px solid #555555;
+}
+
+.mainpage-text{
+    padding: 10px 5px;
+    font-size: 100px;
+    margin-top: -300px;
+}
+

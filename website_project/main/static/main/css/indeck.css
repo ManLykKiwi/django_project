@@ -1,0 +1,102 @@
+body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.flashcardContainer{
+    background: linear-gradient(to right top, #434343, #333333, #242424, #161616, #000000);
+    padding: 2em;
+    position: absolute;
+    width: 50%;
+    height: 60%;
+    box-shadow: 0 0 25px 10px;
+    left: 500px;
+    bottom: 200px;
+    border: 5px solid grey;
+    border-radius: 15px;
+    
+}
+
+.flashcardDetails{
+    position: absolute;
+    color: white;
+    left: 405px;
+    top: 200px;
+    font-size: 50px;
+}
+
+.ansBtn{
+    position: absolute;
+    left: 850px;
+    top: 10px;
+    padding: 15px 20px;
+    background: linear-gradient(to right top, #777777, #666666, #555555, #444444, #333333);
+    color: white;
+
+}
+
+.answerText{
+    position: absolute;
+    color: white;
+    font-size: 50px;
+    left: 405px;
+    top: 250px;
+    border-top: 5px double grey;
+}
+
+#button1 {
+    /* background: yellow !important;
+    border: 5px dashed red !important;
+    font-size: 30px !important; */
+    background: #F44336; 
+    font-size: 15px;
+    max-height: 65px;
+    display: flex;
+    place-items: center;
+    padding: 30px 30px;
+    border-radius: 8px;
+    
+}
+
+#button2 {
+    background: #4CAF50;
+    max-height: 65px;
+    display: flex;
+    place-items: center;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+#button3 {
+    background: #2196F3;
+    max-height: 65px;
+    display: flex;
+    place-items: center;
+    padding: 25px 25px;
+    border-radius: 8px;
+}
+
+#button4 {
+    background: #FFD700;
+    max-height: 65px;
+    display: flex;
+    place-items: center;
+    padding: 20px 18px;
+    border-radius: 8px;
+}
+
+.gradingContainer {
+    display: flex;
+    width: 500px;
+    justify-content:space-around;
+    gap: 100px;
+    position: relative;
+    left: 650px;
+}
+
+.header{
+    position: relative;
+    left: 850px;
+    bottom: 450px !important;
+    color: white;
+}

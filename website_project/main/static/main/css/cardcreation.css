@@ -1,0 +1,10 @@
+.stylingAddingCard{
+    position: relative;
+    color: white;
+    width: 300px;
+    left: 800px;
+    bottom: 300px;
+    border: 1px solid grey;
+    border-radius: 3px;
+    padding: 10px 20px;
+}

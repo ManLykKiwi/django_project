@@ -1,0 +1,221 @@
+{% extends 'main/base.html' %} <!-- Inherting all properties from base.html -->
+
+<head>
+    {% load static %}
+    <!-- Allowing this file to have its own CSS files -->
+    {% block css %}
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3/dist/js.cookie.min.js"></script>
+    <link rel = "stylesheet" href="{% static 'main/css/questionfinder.css'%}">
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    {% endblock %}
+</head>
+
+
+<!-- Content is inserted into the empty block content on base.html page. -->
+{% block content %}
+
+    <!-- Questions output Terminal -->
+    <div class="questionsTerminal">
+        <h2 class = "filterText">Question Filter</h2>
+        <ul id="displayingFilteredQuestions" class = "filteredQuestions"></ul> <!-- HTML Element that retrieved data is loaded into-->
+        <h2 class = "emptyText" style = "display: block;" id = "emptyText">Terminal is Empty <br> Use Filter for Questions!</h2> 
+    </div>
+
+
+
+    <form class = "filterForm" id = "filterForm">
+        {% csrf_token %}
+       
+            <!-- Drop Down Menu -->
+        <div class="filterWrapper">
+
+            <!-- Subject Filter -->
+            <button type = "button" class = "collapseBtn">Subjects</button>  
+            <div class="inputContent">
+
+
+                <label class="checkboxContainer" for="m">Maths
+                    <input type="checkbox" id="m" value="Maths" name="subject">
+                    <span class="check"></span>
+                </label>
+                
+                <label class="checkboxContainer" for="p">Physics
+                    <input type="checkbox" id="p" value="Physics" name="subject">
+                    <span class="check"></span>
+                </label>
+            </div>  
+                
+            <br> 
+            <br>
+            <br>
+            <br>
+
+            <!-- Topics filter -->
+            <button type = "button" class = "collapseBtn">Topics</button>
+            <div class = "inputContent">
+                <label class="checkboxContainer" for="d">Differentiation
+                    <input type = "checkbox" id = "d" value = "Differentiation"name = "topic">
+                    <span class="check"></span>
+                </label>
+                
+                <label class="checkboxContainer" for="t">Trigonometry
+                    <input type="checkbox" id = "t" value = "Trigonometry" name = "topic">
+                    <span class = "check"></span>
+                </label>
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <!-- Difficulty filter -->
+            <button type = "button" class = "collapseBtn">Difficulty</button>
+            <div class = "inputContent">
+                <label class="checkboxContainer" for="one">Easy
+                    <input type = "checkbox" id = "one" value = "1" name = "difficulty">
+                    <span class="check"></span>
+                </label>
+                
+                <label class="checkboxContainer" for="two">Medium
+                    <input type="checkbox" id = "two" value = "2" name = "difficulty">
+                    <span class = "check"></span>
+                </label>
+
+                <label class="checkboxContainer" for = "three">Hard
+                    <input type="checkbox" id = "three" value = "3" name = "difficulty">
+                    <span class = "check"></span>
+                </label>
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <!-- Examboard filter--> 
+            <button type = "button" class = "collapseBtn">Examboards</button>
+            <div class = "inputContent">
+                <label class="checkboxContainer" for="Ed">Edexcel
+                    <input type = "checkbox" id = "Ed" value = "Edexcel"name = "examboard">
+                    <span class="check"></span>
+                </label>
+                
+                <label class="checkboxContainer" for="AQA">AQA
+                    <input type="checkbox" id = "AQA" value = "AQA" name = "examboard">
+                    <span class = "check"></span>
+                </label>
+            </div>
+
+
+
+
+    
+        <!-- 'action' buttons -->
+    
+        <button type="submit" id = "submitBtn" class = "submitBtn">Apply Filters</button>
+        <form action = "{% url 'questionFinder'}">
+            <button type = "submit" id ="resetBtn" class = "resetBtn">Reset</button>
+        </form>
+        </div>
+    </form>
+
+    
+        
+    <script>
+ 
+       var collapsing = document.getElementsByClassName("collapseBtn") //grouping all collapse buttons so they can be looped through
+       var i; 
+
+        
+        for(i = 0; i < collapsing.length; i++) { //
+            collapsing[i].addEventListener("click", function() {
+                this.classList.toggle("active"); //once this 'active' class activated user will be able to see it has been activated via a change in UX 
+                var cont = this.nextElementSibling; //accessing the content that comes right after the collapse button to carry out display and hide functionality
+                if (cont.style.display === "block") {
+                    cont.style.display = "none";
+                
+                }
+                else {
+                    cont.style.display = "block";
+                }
+            });
+        };
+
+        
+
+        const csrftoken = Cookies.get('csrftoken') //retrieving CSRF token from input algorithm on line 2
+        const filterForm = document.getElementById('filterForm');
+        const submitBtn = document.getElementById("submitBtn");
+        const outputContent = document.querySelector("ul");
+        const emptyTerminal = document.getElementById("emptyText");
+        var appliedFilters = { 
+            subject: null,
+            topic: null,
+            difficulty: null,
+            examboard: null,
+        };
+
+        submitBtn.addEventListener('click', event => {           //This is done so that we get data once form has been submitted, not instantaneously
+            event.preventDefault();
+
+            //used to output default message if Terminal is empty 
+            if(emptyTerminal.style.display === "block"){
+                emptyTerminal.style.display = "none"; 
+            }
+            else{
+                emptyTerminal.style.display = "block";
+            };
+
+            const formData = new FormData(filterForm); //collects all the data from the form
+            const retrievedData = Object.fromEntries(formData); //creating a JS object, so that all data from form can be retrieved from this
+
+
+            // Applying the applied filters into one variable
+            appliedFilters.subject = retrievedData.subject;
+            appliedFilters.topic = retrievedData.topic;
+            appliedFilters.difficulty = retrievedData.difficulty;
+            appliedFilters.examboard = retrievedData.examboard;
+
+            
+            
+
+            // Defining URL where data will be sent, a django view recieves data via the URL and processes it
+            fetch('/api/gettingQuestions/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json', //Ensures data is in a JSON Format
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify(appliedFilters) //converting variable into a JSON String
+            //Dealing with promises
+            //Promises are just a certain request that is sent to the backend as is processed
+            //(accepted) or not processed(reject)
+            }).then(response => response.json())
+            .then(recievedData => {
+
+                recievedData.forEach(post => {  //looping through each object from backend 
+                    var attemptingQuestion = "{% url 'attemptingQuestion' %}" //defining django URL as django syntax will not work within line 184
+                    
+                    //inserting retrieved content into the 'displayingFilteredQuestions' at the start of this doc
+                    outputContent.insertAdjacentHTML('beforeend', 
+                        `<li><strong>Question:</strong> ${post.question} <br> <strong>Marks:</strong> ${post.marks} <br> <strong>Difficulty:</strong>${post.difficulty} <br> <strong>Time Required:</strong> ${post.timereq} 
+                        <br> 
+                        <form action="${attemptingQuestion}" method="POST">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="${csrftoken}"> 
+                            <button type="submit" name = "currentQuestionID" value = "${post.id}">Attempt</button> 
+                        </form>
+                        </li>`);
+                });
+            });
+        });    
+    </script>
+
+{% endblock %}
+
+
+
+

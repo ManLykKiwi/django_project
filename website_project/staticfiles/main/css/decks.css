@@ -1,0 +1,48 @@
+body{
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(4,0.5fr);  /* Only allowing 4 decks per row, with a 100px (1fr) horizontal gap between them*/
+    gap:50px;
+    justify-content: center;
+    margin-right: 250px;
+    margin-top: -450px;
+    
+}
+
+/* Ensuring that all decks created have the same dimensions regardless of the size of input */
+li {
+    flex: 0 0 auto; 
+}
+
+.boxes{
+    border-radius: 5px;
+    border: 2px solid white;
+    display: flex;
+    flex-direction: column; /* Vertically aligning inputs*/
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+    padding: 50px 50px; 
+    width: 150px;
+    height: 150px;
+}
+
+.main-text {
+    position: relative;
+    top: -475px; 
+    font-size: 24px;
+    color: white;
+    text-align: center;
+}
+
+.newdecks {
+    /* position: relative;
+    left: 360px;
+    top: 250px; */
+    margin: 20px auto;
+    text-align: center;
+}

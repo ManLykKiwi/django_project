@@ -1,0 +1,89 @@
+.navbar .list svg {
+    height: 30px;
+}
+
+/* What does .custom-sidebar .menu <element> do? */
+  
+
+/* Main Sidebar */
+.navbar {
+    position: fixed;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    font-family: "Scope One", sans-serif;
+    height: 540px !important;
+    width: 100px;
+    top: 24px;
+    left: 24px;
+    border-radius: 5px;
+    box-shadow: 5px 10px 30px rgba(10, 25, 47, 0.6);
+    overflow: hidden;
+    color: #0d1b2a;
+    transition: all 700ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Sort colour of anchor tags once main background-colour has been selected */
+.navbar .list a {
+    color: #0d1b2a;
+}
+
+/* Icons */
+.navbar .list {
+    border-top: 3px solid rgba(42, 13, 13, 0.3);
+    padding: 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.navbar .sub-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    margin: 8px 0px; 
+    padding: 0px 15px;
+    transition: all 700ms ease;
+
+}
+/* Text-transform, transition */
+.navbar:hover {
+    width: 300px; 
+}
+
+.navbar:hover .sub-title{
+    padding: 0 32px;
+}
+
+/* Text of Icons */
+.navbar .list a {
+    display: flex;
+    gap: 20px; 
+    align-items: centre;
+    text-decoration: none;
+    padding: 10px 25px;
+    border-radius: 15px;
+    transition: all 1000ms ease; 
+}
+
+.navbar .list a:hover {
+    background: rgba(173, 216, 230, 0.4);
+}
+
+
+.navbar .label {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-45px);
+    transition: all 700ms ease;
+}
+
+/* Works together with the one above to go from opacity 0-1 */
+.navbar:hover .label {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+
+
+.navbar:hover .list a{
+    margin: 10 30px;
+}

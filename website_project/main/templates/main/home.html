@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+{% load static %}
+<!-- Allowing this file to have its own CSS Files. -->
+{% block css %}
+    <link rel="stylesheet" href="{% static 'main/css/home.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <!-- Main Text Greeting for user as soon as they log onto home page -->
+    <div class="window">
+        <div class="sub-window">
+            <p class="mainpage-text">Hello There!</p>
+        </div>
+    </div>
+
+    <!-- Log Out Option on Home Page -->
+    <div class="movingBtn">
+        <a href="{% url 'logout' %}" class = "btn btn-primary">Log Out</a>
+    </div>
+{% endblock %}

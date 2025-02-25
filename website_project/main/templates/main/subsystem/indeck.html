@@ -1,0 +1,92 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+    
+{% block css %}
+    <link rel="stylesheet" href = "{% static 'main/css/indeck.css' %}">
+{% endblock %}
+
+{% block content %}
+<body>
+    <h2 class = "header"> {{randomQuote}} </h2>
+    
+    {% if currentFlashcard %}   <!-- If there is a flashcard we are displaying both the questions and answers -->
+    <div class = "flashcardContainer">
+        <p class = "flashcardDetails" id = "displayingQuestion">{{ currentFlashcard.question }}</p> <!-- Displaying each flashcard -->
+         <p id ="displayingAnswer" class = "answerText"></p> <!-- Answer is inserted on here once user click answer button-->
+         <button id ="answerButton" type="button" class = "ansBtn">Answer</button>
+         <button id ="editButton" type ="button" class ="editBtn">...</button>         
+    </div>
+    
+        <form id = "displayingGrades" method = "POST" action = "{% url 'insideCurrentDeck' deck_id=displayingDecks.id %}" style = "display: none;">
+            {% csrf_token %}
+            <!-- User grading options, they are wrapped with this anchor tag to ensure that they stay on the same deck after grading and a new flashcard appears-->
+            <div class = "gradingContainer">
+                <button type = "submit" id="button1" name = "Grade" value = "B">Bad</button>  
+                <button type = "submit" id = "button2" name = "Grade" value = "G">Good</button>
+                <button type = "submit" id = "button3" name = "Grade" value = "E">Easy</button>
+                <button type = "submit" id = "button4" name = "Grade" value = "P">Perfect</button>
+            </div>
+        </form>
+
+        <!-- Option to edit current card -->
+        <form id = "..." style = "display: none;">
+            <a href ="{% url 'editingFlashcard' currentFlashcard.id %}" class = "btn btn-primary">Edit</a>
+
+            <!-- Option to delete current card -->
+            <a class = "btn btn-primary" href = "{% url 'deletingFlashcard' currentFlashcard.id %}">Delete</a>
+        </form>
+        
+         <!-- JavaScript used to define answer button and user grading functionality-->
+        <script>
+            const displayingGrades = document.getElementById("displayingGrades");
+            const answerButton = document.getElementById("answerButton");
+            const editButton = document.getElementById("editButton");
+            const displayingEdits = document.getElementById("...");
+           
+            //Used to display answer depending on whether the user has clicked the answer button or not 
+            answerButton.addEventListener('click', function() {
+                var answer = "{{currentFlashcard.answer}}";
+                document.getElementById("displayingAnswer").textContent = answer; //displaying answer in paragraph with corresp. id
+                document.getElementById("displayingQuestion").style.top = "100px"; 
+                displayingGrades.style.display = "block"; //making the grades visible after answer clicked
+            });
+
+            editButton.addEventListener("click", function() {
+                if(displayingEdits.style.display === "none"){
+                    displayingEdits.style.display = "block"; //display if not displaying
+                }
+                else{
+                    displayingEdits.style.display = "none"; //hide if displaying
+                };
+            });
+
+            
+                 
+
+
+        </script>
+
+    <!-- Option Add Flashcards when there are already flashcards in deck -->
+    <div class="newFlashcards">
+        <a class="btn btn-primary" href="{% url 'newFlashcard' currentFlashcard.deck.id %}">Add New Flashcards Here!</a>    
+    </div>
+
+    <!-- Option to delete deck -->
+    <a class = "btn btn-primary" href = "{% url 'deletingDeck' displayingDecks.id %}">Delete Deck</a>
+
+    {% else %}
+        <p>There are no flashcards in this deck yet!, maybe you should add some!</p>
+        <!-- Re-displaying add flashcard button in the case there are now flashcards in deck -->
+        <div class="newFlashcards">
+            <a class="btn btn-primary" href="{% url 'newFlashcard' displayingDecks.id %}">Add New Flashcards Here!</a>    
+        </div>
+    {% endif %}
+
+</body>
+
+
+
+{% endblock %}
+

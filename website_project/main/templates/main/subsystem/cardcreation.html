@@ -1,0 +1,46 @@
+{% extends 'main/base.html'%}
+{% load static %}
+
+
+
+<head>
+    {% block css %}
+    <link rel = "stylesheet" href = "{% static 'main/css/cardcreation.css'%}">
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    {% load crispy_forms_tags %}
+    <title>Create Your Decks Here!</title>
+</head>
+{% block content %}
+<body>
+    <div class="stylingAddingCard">
+        <form method = "post">
+            {% csrf_token %}   
+            {{form|crispy}} <!-- Filtering the flashcardForm from forms.py into crispy format-->
+            <!-- If there has been any TYPE of message that has been sent from the backend to this template it is displayed. -->
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == "error" %} 
+                    <script>
+                        const errorMsg = "{{ message }}";
+                        alert(errorMsg);
+                    </script>
+                    {% endif %}
+                    
+                {% endfor %}
+            {% endif %}
+
+            <!-- Allowing users to confirm and save their changes  -->
+            <button type = "submit" class = "btn btn-primary" url = "{% url 'listingDecks' %}">Add Card</button>
+        </form>
+    </div>
+
+
+</body>
+{% endblock %}
+    
+    
+
+
+
+

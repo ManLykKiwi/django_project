@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+{% block title %}Register{% endblock %}
+{% load crispy_forms_tags %} {# Loads the crispy forms feature of django #}
+{% load static %}
+
+{% block navbar %}
+
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'main/css/register.css' %}">
+{% endblock %}
+
+{% block content %} 
+
+
+
+
+<div class="content-section">
+    <form method="post">
+        <!-- Setting up the main register form -->
+        {% csrf_token %} {# Ensuring Django's security measures for POST methods are activated #}
+        <fieldset class ="form-group">
+            <legend class="border-bottom mb-4">Join Today</legend>
+            {{form|crispy}}  {# Converting my custom filter into a crispy form format #}
+        </fieldset> 
+
+            <!-- Giving user option to save changes and complete registering -->
+            <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+{% endblock %}

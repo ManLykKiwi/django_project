@@ -1,0 +1,4 @@
+body {
+    height: 100vh; /* Used to Smooth Out the Background Colour*/
+    background: linear-gradient(to right top, #434343, #333333, #242424, #161616, #000000);
+}

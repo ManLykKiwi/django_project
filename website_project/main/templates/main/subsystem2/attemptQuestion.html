@@ -1,0 +1,65 @@
+{% extends "main/base.html" %}
+<head>
+    {% load static %}
+    <!-- Importing all required CSS for this file -->
+    {% block css %}
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3/dist/js.cookie.min.js"></script>
+    <link rel="stylesheet" href = '{% static "main/css/attemptQuestion.css" %}'>
+    {% endblock %}
+</head>
+<body>
+<!-- Inserting content into empty blocks in base.html -->
+{% block content %}
+    <div class="mainContainer">
+    <button id ="answerButton" type="button" class = "ansBtn">Answer</button>
+
+    <!-- These 'moving' classes allow for movement of buttons or anchors that use bootstrap classes  -->
+    <div class="movingReButton">
+        <a class="btn btn-primary" href="{% url 'questionFinder' %}">Back to Question Finder</a>   
+    </div>
+
+    <!-- Similar to flashcards - all questions will be displayed here -->
+        <div class="questionContainer">
+            <h1 class = "qText" id = "displayingQuestion">{{question}}</h1>
+        </div>
+
+
+        <!-- Answer will be inserted in here once user clicks answer button -->
+        <div class = "answerContainer"> 
+            <p id ="displayingAnswer" class = "aText"></p>
+        </div>
+
+
+    </div>
+
+
+    <script>
+        //Used to display question depending on whether the user has clicked the answer button or not 
+        const answerButton = document.getElementById("answerButton");
+        answerButton.addEventListener('click', function() {
+                var answer = "{{answer}}<br>(Marks: {{marks}})"; //ensuring that answer and marks are displayed underneath each other
+                document.getElementById("displayingAnswer").innerHTML = answer; //displaying answer in paragraph with corresp. id
+                document.getElementById("displayingQuestion").style.top = "100px"; 
+            });
+    </script> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+</body>

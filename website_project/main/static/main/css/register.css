@@ -1,0 +1,11 @@
+.content-section {
+    position: relative;
+    margin: 500px auto;
+    margin-top: 100px !important; /* Used to override conflicting styles */
+    padding: 10px 20px;
+    border: 1px solid grey;
+    border-radius: 3px;
+    color: white;
+    width: 600px;
+
+}

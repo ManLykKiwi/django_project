@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+{% load static %}
+<!-- Overriding base.html title -->
+{% block title %}Login Page {% endblock %}
+<head>
+    {% block css %}
+        <!-- Loading into css file for login page -->
+        <link rel="stylesheet" href="{% static 'main/css/login.css' %}">
+    {% endblock %}
+</head>
+
+{% load crispy_forms_tags %}     {# using Django's built in forms #}
+
+{% block content %} 
+<!-- Main Login Page Text -->
+<h1 class = "welcomeMessage">Hey, Welcome back!</h1>
+<h1 class = "tagLine">Study Smarter, Achieve More!</h1>
+<h1 class = "registerText">New Here?</h1>
+
+
+<!-- Main Login Form, form|crispy consists of all inputs -->
+<div class="loginContainer">
+    <form method="post">
+        {% csrf_token %}        {# Included to ensure django's security measures for POST methods are activated #}
+        {{form|crispy}}         {# converting my custom form into a crispy format #}
+        <button class = "btn btn-primary" type="submit">Log In</button>
+    </form>
+</div>
+
+<!-- Anchor tag is used instead of a button here since we do not need to pass any data  -->
+<div class="registerBtn">
+    <!-- Register Page Option -->
+    <a href="{% url 'register' %}" class = "btn btn-primary">Register</a>
+</div>
+{% endblock %}
+

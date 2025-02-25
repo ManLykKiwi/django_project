@@ -1,0 +1,45 @@
+body{
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.loginContainer {
+    position: relative;
+    margin: 500px auto;
+    margin-top: 100px !important; /* Used to override conflicting styles */
+    padding: 10px 20px;
+    bottom: 500px;
+    border: 1px solid grey;
+    border-radius: 3px;
+    color: white;
+    width: 650px;
+
+}
+
+.welcomeMessage{
+    position: relative;
+    left: 775px;
+    bottom: 450px;
+    color: white;
+}
+
+.tagLine{
+    position: relative;
+    left: 700px;
+    top: 100px;
+    color: white;
+}
+
+.registerText{
+    position: relative;
+    color: white;
+    left: 100px;
+    top: 45px;
+}
+
+.registerBtn {
+   position: absolute; 
+   top: 705px;
+   left: 300px;
+}
+

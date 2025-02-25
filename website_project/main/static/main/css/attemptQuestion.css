@@ -1,0 +1,58 @@
+.mainContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    background:linear-gradient(to right top,#434343, #333333, #242424, #161616, #000000); 
+    height: 800px;
+    width: 900px;
+    left: 500px;
+    bottom: 500px;
+}
+
+
+/* Another flexbox here helps ensure that the text is always centered at the middle of the main container*/
+.questionContainer{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    
+}
+
+.qText{
+    font-size: 40px;
+    text-align: center;
+    font-weight: 600;
+    font-family: 'Poppins';
+}
+
+.answerContainer{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.aText{
+    font-size: 35px;
+    font-weight: 400;
+    font-family: 'Poppins';
+}
+
+.ansBtn{
+    position: absolute;
+    left: 805px;
+    top: 0px; /* without this button will drop down next to text*/
+    padding: 15px 20px;
+    background: linear-gradient(to right top, #777777, #666666, #555555, #444444, #333333); 
+    color: white;
+
+}
+
+.movingReButton{
+    position: relative;
+    right: 350px;
+    top: -290px;
+}
